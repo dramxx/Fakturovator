@@ -13,12 +13,21 @@ import DemoTable from '../components/DemoTable';
 import { useDemos } from '../api/demoApi';
 
 function DemoPage() {
-  const { data: demos, isLoading: isLoadingDemos, error: demosError } = useDemos();
+  const {
+    data: demos,
+    isLoading: isLoadingDemos,
+    error: demosError,
+  } = useDemos();
 
   if (demosError) {
     return (
       <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Button component={Link} to="/" startIcon={<ArrowBackIcon />} sx={{ mb: 2 }}>
+        <Button
+          component={Link}
+          to="/"
+          startIcon={<ArrowBackIcon />}
+          sx={{ mb: 2 }}
+        >
           Back to Home
         </Button>
         <Typography color="error">
@@ -30,7 +39,12 @@ function DemoPage() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Button component={Link} to="/" startIcon={<ArrowBackIcon />} sx={{ mb: 2 }}>
+      <Button
+        component={Link}
+        to="/"
+        startIcon={<ArrowBackIcon />}
+        sx={{ mb: 2 }}
+      >
         Back to Home
       </Button>
 

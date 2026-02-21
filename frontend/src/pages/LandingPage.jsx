@@ -1,12 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Container,
-  Typography,
-  Button,
-  Box,
-  Paper,
-} from '@mui/material';
+import { Container, Typography, Button, Box, Paper } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function LandingPage() {
@@ -16,7 +10,7 @@ function LandingPage() {
         <Typography variant="h1" component="h1" gutterBottom>
           Fakturovator
         </Typography>
-      
+
         <Box sx={{ mt: 4 }}>
           <Button
             component={Link}

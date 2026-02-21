@@ -11,7 +11,7 @@ const demoSlice = createSlice({
     setContent: (state, action) => {
       state.content = action.payload;
     },
-    clearContent: (state) => {
+    clearContent: state => {
       state.content = '';
     },
   },

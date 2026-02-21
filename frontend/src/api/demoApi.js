@@ -8,12 +8,12 @@ const fetchDemos = async () => {
   return data;
 };
 
-const createDemo = async (content) => {
+const createDemo = async content => {
   const { data } = await apiClient.post('/demo', { content: content });
   return data;
 };
 
-const deleteDemo = async (id) => {
+const deleteDemo = async id => {
   await apiClient.delete(`/demo/${id}`);
 };
 

@@ -1,15 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  TextField,
-  Button,
-  Box,
-} from '@mui/material';
+import { TextField, Button, Box } from '@mui/material';
 import { setContent, clearContent } from '../store/demoSlice';
 import { useCreateDemo } from '../api/demoApi';
 
 function DemoForm() {
-  const content = useSelector((state) => state.demo.content);
+  const content = useSelector(state => state.demo.content);
   const dispatch = useDispatch();
   const createDemoMutation = useCreateDemo();
 
@@ -25,7 +21,7 @@ function DemoForm() {
     });
   };
 
-  const handleContentChange = (e) => {
+  const handleContentChange = e => {
     dispatch(setContent(e.target.value));
   };
 

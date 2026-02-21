@@ -17,7 +17,7 @@ import { useDeleteDemo } from '../api/demoApi';
 function DemoTable({ demos }) {
   const deleteDemoMutation = useDeleteDemo();
 
-  const handleDelete = async (id) => {
+  const handleDelete = async id => {
     deleteDemoMutation.mutate(id);
   };
 
@@ -46,10 +46,12 @@ function DemoTable({ demos }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {demos.map((demo) => (
+            {demos.map(demo => (
               <TableRow key={demo.id}>
                 <TableCell>{demo.content}</TableCell>
-                <TableCell>{new Date(demo.createdAt).toLocaleString()}</TableCell>
+                <TableCell>
+                  {new Date(demo.createdAt).toLocaleString()}
+                </TableCell>
                 <TableCell align="center">
                   <IconButton
                     color="error"
