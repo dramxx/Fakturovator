@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Table,
   TableBody,
@@ -12,6 +11,7 @@ import {
   Box,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PropTypes from 'prop-types';
 import { useDeleteDemo } from '../api/demoApi';
 
 function DemoTable({ demos }) {
@@ -70,5 +70,14 @@ function DemoTable({ demos }) {
     </Box>
   );
 }
+
+DemoTable.propTypes = {
+  demos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      content: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default DemoTable;

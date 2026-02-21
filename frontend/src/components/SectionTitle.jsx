@@ -1,13 +1,14 @@
 // src/components/SectionTitle.jsx
 import { Typography, Box } from '@mui/material';
 import PropTypes from 'prop-types';
+import { getColor } from '../theme/colors';
 
 const SectionTitle = ({
   children,
   variant = 'h1',
   component = 'h1',
-  color = '#0066CC',
-  underlineColor = '#FF0000',
+  color = getColor('text.primary'),
+  underlineColor = getColor('primary.red'),
   fontSize = '3rem',
   underlineWidth = '9%',
   underlineHeight = '14px',
@@ -19,12 +20,12 @@ const SectionTitle = ({
         variant={variant}
         component={component}
         sx={{
+          userSelect: 'none',
           fontSize: fontSize,
           fontWeight: 700,
           color: color,
           lineHeight: 0.95,
           letterSpacing: '-0.02em',
-          fontFamily: '"Jost", "Helvetica Neue", Arial, sans-serif',
           ...typographyProps.sx,
         }}
         {...typographyProps}

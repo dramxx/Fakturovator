@@ -1,3 +1,23 @@
+/* CSS Variables for Fakturovator Design System */
+:root {
+  /* Primary Colors */
+  --primary-blue: #0066cc;
+  --primary-red: #ff0000;
+
+  /* Secondary Colors */
+  --secondary-yellow: #ffaa00;
+  --secondary-blue: #1f46ba;
+
+  /* Background Colors */
+  --bg-light: #fafafa;
+  --bg-white: #ffffff;
+
+  /* Text Colors */
+  --text-primary: #0066cc;
+  --text-dark: #333333;
+}
+
+/* Legacy App styles */
 .App {
   text-align: center;
 }

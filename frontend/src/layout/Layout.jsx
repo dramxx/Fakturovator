@@ -1,10 +1,10 @@
-import { Box, Paper } from '@mui/material';
-import SectionTitle from '../components/SectionTitle';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
+import { Paper, Box } from '@mui/material';
+import PropTypes from 'prop-types';
+import Header from './Header';
+import Footer from './Footer';
 import { getColor } from '../theme/colors';
 
-function LandingPage() {
+const Layout = ({ children, shapeOpacity = 0.3 }) => {
   return (
     <Box
       sx={{
@@ -12,9 +12,12 @@ function LandingPage() {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: getColor('background.white'),
+        position: 'relative',
       }}
     >
-      <Header />
+      <Box sx={{ position: 'sticky', top: 0, zIndex: 1000 }}>
+        <Header />
+      </Box>
       <Box
         component="main"
         sx={{
@@ -22,9 +25,11 @@ function LandingPage() {
           padding: '2em',
           display: 'flex',
           flexDirection: 'column',
-          overflow: 'hidden',
+          overflow: 'auto',
+          maxHeight: 'calc(100vh - 128px)', // Approximate header + footer height
         }}
       >
+        {/* whitebox */}
         <Paper
           elevation={0}
           sx={{
@@ -43,8 +48,8 @@ function LandingPage() {
               right: '1px',
               bottom: '1px',
               backgroundImage: `
-                linear-gradient(rgba(0,0,0,0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.15) 1px, transparent 1px)
+                linear-gradient(${getColor('grid.line')} 1px, transparent 1px),
+                linear-gradient(90deg, ${getColor('grid.line')} 1px, transparent 1px)
               `,
               backgroundSize: '400px 400px',
               backgroundPosition: '-1px -1px',
@@ -62,8 +67,8 @@ function LandingPage() {
               height: '180px',
               backgroundColor: getColor('secondary.yellow'),
               borderRadius: '50%',
-              zIndex: 3,
-              opacity: 0.7,
+              zIndex: 0,
+              opacity: shapeOpacity === 0.7 ? 0.7 : shapeOpacity,
             }}
           />
 
@@ -76,8 +81,8 @@ function LandingPage() {
               width: '300px',
               height: '300px',
               backgroundColor: getColor('secondary.blue'),
-              zIndex: 3,
-              opacity: 0.9,
+              zIndex: 0,
+              opacity: shapeOpacity === 0.9 ? 0.9 : shapeOpacity,
             }}
           />
 
@@ -94,43 +99,22 @@ function LandingPage() {
               position: 'absolute',
               top: '0',
               right: '0',
-              opacity: 1,
+              opacity: shapeOpacity === 1 ? 1 : shapeOpacity,
             }}
           />
-          <Box
-            sx={{
-              flex: 1,
-              position: 'relative',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'flex-start',
-            }}
-          >
-            {/* Fakturovator text position */}
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: '50%',
-                left: '10%',
-                transform: 'translate(-10%, 50%)',
-                zIndex: 4,
-              }}
-            >
-              <SectionTitle
-                fontSize="8rem"
-                underlineWidth="70%"
-                underlineHeight="30px"
-              >
-                Fakturovator.
-              </SectionTitle>
-            </Box>
-          </Box>
+          <Box sx={{ position: 'relative', zIndex: 1 }}>{children}</Box>
         </Paper>
       </Box>
-      <Footer />
+      <Box sx={{ position: 'sticky', bottom: 0, zIndex: 1000 }}>
+        <Footer />
+      </Box>
     </Box>
   );
-}
+};
 
-export default LandingPage;
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+  shapeOpacity: PropTypes.number,
+};
+
+export default Layout;

@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { TextField, Button, Box } from '@mui/material';
+import { TextField, Box } from '@mui/material';
 import { setContent, clearContent } from '../store/demoSlice';
 import { useCreateDemo } from '../api/demoApi';
+import GeneralButton from './GeneralButton';
 
 function DemoForm() {
   const content = useSelector(state => state.demo.content);
@@ -35,14 +36,14 @@ function DemoForm() {
         multiline
         rows={4}
       />
-      <Button
-        variant="contained"
+      <GeneralButton
+        variant="outlined"
         onClick={handleSubmit}
         disabled={!content.trim() || isSubmitting}
         sx={{ mt: 2 }}
       >
         {isSubmitting ? 'Saving...' : 'Save to Database'}
-      </Button>
+      </GeneralButton>
     </Box>
   );
 }

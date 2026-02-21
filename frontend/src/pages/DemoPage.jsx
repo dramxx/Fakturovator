@@ -1,14 +1,7 @@
-import { Link } from 'react-router-dom';
-import {
-  Container,
-  Typography,
-  Button,
-  Box,
-  CircularProgress,
-} from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Container, Box, CircularProgress } from '@mui/material';
 import DemoForm from '../components/DemoForm';
 import DemoTable from '../components/DemoTable';
+import SectionTitle from '../components/SectionTitle';
 import { useDemos } from '../api/demoApi';
 
 function DemoPage() {
@@ -19,35 +12,25 @@ function DemoPage() {
   } = useDemos();
 
   if (demosError) {
-    return (
-      <Container maxWidth="md" sx={{ mt: 4 }}>
-        <Button
-          component={Link}
-          to="/"
-          startIcon={<ArrowBackIcon />}
-          sx={{ mb: 2 }}
-        >
-          Back to Home
-        </Button>
-        <Typography color="error">
-          Error loading demos: {demosError.message}
-        </Typography>
-      </Container>
-    );
+    console.error(demosError);
+    return;
   }
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <DemoForm />
+    <>
+      <SectionTitle>Api Test.</SectionTitle>
+      <Container maxWidth="md" sx={{ mt: 4 }}>
+        <DemoForm />
 
-      {isLoadingDemos ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <DemoTable demos={demos || []} />
-      )}
-    </Container>
+        {isLoadingDemos ? (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <CircularProgress />
+          </Box>
+        ) : (
+          <DemoTable demos={demos || []} />
+        )}
+      </Container>
+    </>
   );
 }
 

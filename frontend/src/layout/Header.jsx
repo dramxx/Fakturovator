@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { getColor } from '../theme/colors';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,8 +24,8 @@ const Header = () => {
       position="static"
       elevation={2}
       sx={{
-        backgroundColor: '#1976d2',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
+        backgroundColor: getColor('primary.blue'),
+        borderBottom: `1px solid ${getColor('grid.line')}`,
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -36,7 +37,7 @@ const Header = () => {
           sx={{
             fontWeight: 'bold',
             letterSpacing: 1,
-            color: 'white',
+            color: getColor('background.white'),
             cursor: 'pointer',
             userSelect: 'none',
             '&:hover': {
@@ -73,7 +74,7 @@ const Header = () => {
             onClick={() => navigate('/settings')}
             sx={{
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                backgroundColor: getColor('grid.line'),
               },
             }}
           >
