@@ -5,13 +5,11 @@ import {
   Box,
   Button,
   IconButton,
-  useTheme,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 const Header = () => {
-  const theme = useTheme();
   const navigate = useNavigate();
 
   const menuItems = [
@@ -25,8 +23,8 @@ const Header = () => {
       position="static"
       elevation={2}
       sx={{
-        backgroundColor: theme.palette.primary.main,
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        backgroundColor: '#1976d2',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.12)',
       }}
     >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -38,8 +36,9 @@ const Header = () => {
           sx={{
             fontWeight: 'bold',
             letterSpacing: 1,
-            color: theme.palette.common.white,
+            color: 'white',
             cursor: 'pointer',
+            userSelect: 'none',
             '&:hover': {
               opacity: 0.8,
             },

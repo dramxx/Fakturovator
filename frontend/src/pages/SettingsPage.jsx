@@ -1,5 +1,7 @@
+import SectionTitle from '../components/SectionTitle';
+
 const SettingsPage = () => {
-  return <h1>settings</h1>;
+  return <SectionTitle>Settings.</SectionTitle>;
 };
 
 export default SettingsPage;

@@ -1,5 +1,7 @@
+import SectionTitle from '../components/SectionTitle';
+
 const InvoicesPage = () => {
-  return <h1>invoices</h1>;
+  return <SectionTitle>Invoices.</SectionTitle>;
 };
 
 export default InvoicesPage;
