@@ -1,6 +1,6 @@
-# Fakturovator - Demo Application
+# Fakturovator
 
-A minimal, full-stack demo application showcasing clean architecture with .NET 8 Web API backend, React frontend, and PostgreSQL database.
+Invoices. Simply.
 
 ## Project Structure
 
@@ -10,7 +10,7 @@ Fakturovator/
 │   ├── Fakturovator.API/              # Main API project
 │   │   ├── Controllers/               # API controllers
 │   │   ├── Data/                      # DbContext & EF Core configuration
-│   │   ├── DTOs/                      # Data Transfer Objects
+│   │   │   ├── DTOs/                      # Data Transfer Objects
 │   │   ├── Migrations/                # EF Core Code-First migrations
 │   │   ├── Models/                    # Domain entities
 │   │   ├── appsettings.json           # Configuration
@@ -19,13 +19,75 @@ Fakturovator/
 ├── frontend/
 │   ├── src/
 │   │   ├── api/                       # TanStack Query hooks & API client
-│   │   ├── store/                     # Redux store & slices
+│   │   ├── components/                   # Reusable UI components
+│   │   │   ├── SectionTitle.jsx       # Title component with red underline
+│   │   │   └── GeneralButton.jsx    # Button component with red underline & blue outline
+│   │   ├── layout/                     # Layout-specific components
+│   │   │   ├── Header.jsx              # Navigation header
+│   │   │   ├── Footer.jsx              # Page footer
+│   │   │   └── Layout.jsx             # Main layout wrapper with decorative shapes
+│   │   ├── pages/                       # Page components
+│   │   │   ├── LandingPage.jsx         # Full-screen landing page
+│   │   │   ├── DemoPage.jsx            # API demo page
+│   │   │   ├── InvoicesPage.jsx        # Invoice management
+│   │   │   ├── CompaniesPage.jsx       # Company management
+│   │   │   ├── ClientsPage.jsx         # Client management
+│   │   │   └── SettingsPage.jsx        # Settings page
+│   │   ├── store/                      # Redux store & slices
+|   |   ├── hooks/                      # Custom hooks
 │   │   ├── App.jsx                    # Main application component
 │   │   └── index.jsx                  # App entry with providers
 │   ├── package.json
 │   └── vitest.config.js               # Test configuration
 └── Fakturovator.sln                   # Solution file
 ```
+
+## Frontend Architecture
+
+### Component Organization
+
+#### UI Components (`src/components/`)
+
+- **SectionTitle**: Reusable title component with customizable red underline
+- **GeneralButton**: Button component with red underline, blue outline, and hover effects
+
+#### Layout Components (`src/layout/`)
+
+- **Header**: Navigation header with menu items and settings
+- **Footer**: Page footer with API test link
+- **Layout**: Main layout wrapper with:
+  - Sticky header and footer
+  - Decorative shapes (yellow circle, blue square, red triangle)
+  - Scrollable content area
+  - Centralized color system integration
+
+### Design System (`src/theme/`)
+
+- **colors.js**: Centralized color definitions with helper functions
+  - **Primary colors**: Blue (#0066CC), Red (#FF0000)
+  - **Secondary colors**: Yellow (#ffaa00), Blue (#1f46ba)
+  - **Background colors**: Light (#fafafa), White (#ffffff)
+  - **Grid colors**: Line patterns for decorative backgrounds
+
+### Color Usage
+
+All components use the centralized `getColor(path)` function:
+
+- `getColor('primary.blue')` - Primary blue for headers, buttons
+- `getColor('primary.red')` - Primary red for underlines, triangles
+- `getColor('secondary.yellow')` - Secondary yellow for decorative shapes
+- `getColor('secondary.blue')` - Secondary blue for decorative shapes
+- `getColor('background.light')` - Light background for content areas
+- `getColor('background.white')` - White background for main container
+- `getColor('grid.line')` - Grid line patterns
+- `getColor('text.primary')` - Primary text color
+
+This centralized approach allows:
+
+- **Easy theme switching** - Change colors in one place
+- **Consistent branding** - All components use same color definitions
+- **Maintainable code** - Single source of truth for colors
+- **Type safety** - Helper function provides color access patterns
 
 ## Prerequisites
 
@@ -59,27 +121,32 @@ dotnet tool run dotnet-ef database update
 #### Migration Workflow
 
 **Add a new migration after model changes:**
+
 ```bash
 cd backend/Fakturovator.API
 dotnet tool run dotnet-ef migrations add MigrationName --output-dir Migrations
 ```
 
 **Apply pending migrations:**
+
 ```bash
 dotnet tool run dotnet-ef database update
 ```
 
 **Revert to previous migration:**
+
 ```bash
 dotnet tool run dotnet-ef database update PreviousMigrationName
 ```
 
 **Generate SQL script (for production deployment):**
+
 ```bash
 dotnet tool run dotnet-ef migrations script
 ```
 
 **What this does:**
+
 - Uses EF Core Code-First Migrations for version-controlled schema changes
 - Creates `demos` table with proper PostgreSQL types
 - Tracks migration history in `__EFMigrationsHistory` table
@@ -88,6 +155,7 @@ dotnet tool run dotnet-ef migrations script
 ### 2. Backend Setup
 
 **Environment Configuration:**
+
 ```bash
 cd backend/Fakturovator.API
 cp .env.example .env
@@ -95,12 +163,14 @@ cp .env.example .env
 ```
 
 **Run the application:**
+
 ```bash
 dotnet restore
 dotnet run
 ```
 
 **API Endpoints:**
+
 - API: `http://localhost:5000`
 - Swagger UI: `http://localhost:5000/swagger`
 
@@ -135,6 +205,7 @@ We use a **simplified architecture** with direct database access:
 ```
 
 **Why this approach:**
+
 - **Simplicity**: Direct DbContext usage for straightforward CRUD operations
 - **Performance**: No unnecessary abstraction layers
 - **Maintainability**: Easy to understand and modify
@@ -143,6 +214,7 @@ We use a **simplified architecture** with direct database access:
 #### Key Components
 
 **DemoController**: Handles HTTP requests/responses
+
 ```csharp
 [HttpGet]
 public async Task<ActionResult<IEnumerable<Demo>>> GetDemos()
@@ -153,6 +225,7 @@ public async Task<ActionResult<IEnumerable<Demo>>> GetDemos()
 ```
 
 **ApplicationDbContext**: EF Core configuration
+
 ```csharp
 public DbSet<Demo> Demos { get; set; }
 
@@ -189,6 +262,7 @@ We use a **hybrid approach** - Redux for UI state, TanStack Query for server sta
 ```
 
 **Why split state?**
+
 - **Server state** (API data): Needs caching, synchronization, background updates
 - **UI state** (form inputs): Needs predictable, synchronous updates
 
@@ -199,17 +273,18 @@ We use a **hybrid approach** - Redux for UI state, TanStack Query for server sta
 ```javascript
 // Slice combines actions + reducer
 const demoSlice = createSlice({
-  name: 'demo',
-  initialState: { content: '' },
+  name: "demo",
+  initialState: { content: "" },
   reducers: {
     setContent: (state, action) => {
-      state.content = action.payload;  // Immer allows "mutating" syntax
+      state.content = action.payload; // Immer allows "mutating" syntax
     },
   },
 });
 ```
 
 **Why Redux Toolkit?**
+
 - **Less Boilerplate**: No action constants, no switch statements
 - **Immer Integration**: Write "mutating" code that produces immutable updates
 - **DevTools**: Time-travel debugging out of the box
@@ -225,27 +300,28 @@ const demoSlice = createSlice({
 // Custom hook for fetching demos
 export const useDemos = () => {
   return useQuery({
-    queryKey: ['demos'],           // Unique cache key
-    queryFn: fetchDemos,           // Function to fetch data
-    staleTime: 5 * 60 * 1000,      // Data fresh for 5 minutes
+    queryKey: ["demos"], // Unique cache key
+    queryFn: fetchDemos, // Function to fetch data
+    staleTime: 5 * 60 * 1000, // Data fresh for 5 minutes
   });
 };
 
 // Mutation for creating demos
 export const useCreateDemo = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: createDemo,
     onSuccess: () => {
       // Automatically refresh list after creation
-      queryClient.invalidateQueries({ queryKey: ['demos'] });
+      queryClient.invalidateQueries({ queryKey: ["demos"] });
     },
   });
 };
 ```
 
 **Why TanStack Query?**
+
 - **Automatic Caching**: Data cached by query key
 - **Background Refetching**: Stale data refreshed automatically
 - **Loading States**: Built-in `isLoading`, `isPending` flags
@@ -272,6 +348,7 @@ export const useCreateDemo = () => useMutation({...});
 ```
 
 **Why this pattern?**
+
 - **DRY**: API logic not duplicated across components
 - **Testable**: Easy to mock API calls
 - **Configurable**: Central place for auth headers, error handling
@@ -310,6 +387,7 @@ GRANT ALL PRIVILEGES ON TABLE demos TO fakturovator_app;
 ## Current Features
 
 ### Backend
+
 - **Minimal API** - Direct DbContext usage
 - **Entity Framework Core** - PostgreSQL with proper mapping
 - **CORS** - Configured for local development
@@ -317,6 +395,7 @@ GRANT ALL PRIVILEGES ON TABLE demos TO fakturovator_app;
 - **Code-First Migrations** - Version-controlled schema
 
 ### Frontend
+
 - **Redux Toolkit** - Modern Redux with less boilerplate
 - **TanStack Query** - Server state management with caching
 - **API Layer** - Centralized HTTP with Axios
@@ -325,6 +404,7 @@ GRANT ALL PRIVILEGES ON TABLE demos TO fakturovator_app;
 - **Unit Testing** - Vitest + React Testing Library
 
 ### Database
+
 - **PostgreSQL** - Robust relational database
 - **Single Table** - `demos` table with Id, Content, CreatedAt
 - **Migration Support** - Version-controlled schema changes
@@ -335,15 +415,16 @@ GRANT ALL PRIVILEGES ON TABLE demos TO fakturovator_app;
 
 ### Demo CRUD Operations
 
-| Method | Endpoint | Description |
-|---------|-----------|-------------|
-| GET | `/api/demo` | Get all demos (ordered by creation date) |
-| POST | `/api/demo` | Create new demo |
-| DELETE | `/api/demo/{id}` | Delete demo by ID |
+| Method | Endpoint         | Description                              |
+| ------ | ---------------- | ---------------------------------------- |
+| GET    | `/api/demo`      | Get all demos (ordered by creation date) |
+| POST   | `/api/demo`      | Create new demo                          |
+| DELETE | `/api/demo/{id}` | Delete demo by ID                        |
 
 ### Request/Response Examples
 
 **GET /api/demo**
+
 ```json
 [
   {
@@ -355,6 +436,7 @@ GRANT ALL PRIVILEGES ON TABLE demos TO fakturovator_app;
 ```
 
 **POST /api/demo**
+
 ```json
 // Request
 {
@@ -381,6 +463,7 @@ dotnet test
 ```
 
 **Architecture:**
+
 - Uses **Moq** to mock service layer (true unit tests, no database)
 - Tests controller behavior, not implementation details
 
@@ -411,6 +494,7 @@ npm run test:ui       # Visual test runner
 ### Remaining TODOs for Production
 
 #### High Priority
+
 1. **Global Error Handling Middleware** - Catch unhandled exceptions
 2. **Input Validation Middleware** - Validate at API boundary
 3. **Logging & Observability** - Structured logging (Serilog), correlation IDs
@@ -422,6 +506,7 @@ npm run test:ui       # Visual test runner
 9. **Authentication & Authorization** - JWT or OAuth2
 
 #### Medium Priority
+
 10. **Soft Deletes** - Mark deleted, don't remove data
 11. **Audit Logging** - Who changed what and when
 12. **Response Caching** - Cache frequently accessed data
@@ -432,6 +517,7 @@ npm run test:ui       # Visual test runner
 17. **CI/CD Pipeline** - GitHub Actions for build/test/deploy
 
 #### Low Priority
+
 18. **API Documentation** - Enhance Swagger with XML comments
 19. **Localization** - Multi-language support
 20. **Feature Flags** - Gradual rollout capability
@@ -444,6 +530,7 @@ npm run test:ui       # Visual test runner
 Based on the best practices analysis, recommended implementation order:
 
 ### Phase 1: Foundation (Core Infrastructure)
+
 1. Add global exception handling middleware with logging
 2. Implement structured logging (Serilog) with correlation IDs
 3. Add health checks endpoint (`/health`)
@@ -451,6 +538,7 @@ Based on the best practices analysis, recommended implementation order:
 5. Add input validation middleware (FluentValidation)
 
 ### Phase 2: Security & Performance
+
 6. Implement JWT authentication
 7. Add authorization policies
 8. Implement pagination for all list endpoints
@@ -458,6 +546,7 @@ Based on the best practices analysis, recommended implementation order:
 10. Configure rate limiting
 
 ### Phase 3: DevOps & Developer Experience
+
 11. Create Docker Compose setup
 12. Set up GitHub Actions CI/CD pipeline
 13. Add environment variable validation
@@ -465,6 +554,7 @@ Based on the best practices analysis, recommended implementation order:
 15. Add API versioning
 
 ### Phase 4: Features
+
 16. Implement customer CRUD operations
 17. Build invoice creation workflow
 18. Add PDF generation for invoices
@@ -476,6 +566,7 @@ Based on the best practices analysis, recommended implementation order:
 ## Troubleshooting
 
 ### Backend won't start
+
 ```bash
 # Check if PostgreSQL is running
 pg_isready
@@ -488,12 +579,14 @@ psql -U postgres -c "\du"
 ```
 
 ### Frontend shows API errors
+
 ```bash
 # Ensure backend is running on port 5000
 # Check CORS configuration in Program.cs matches frontend URL
 ```
 
 ### Database issues
+
 ```bash
 # Reset database (WARNING: destroys data)
 cd backend/Fakturovator.API
