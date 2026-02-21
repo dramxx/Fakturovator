@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -39,19 +38,6 @@ function DemoPage() {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Button
-        component={Link}
-        to="/"
-        startIcon={<ArrowBackIcon />}
-        sx={{ mb: 2 }}
-      >
-        Back to Home
-      </Button>
-
-      <Typography variant="h3" component="h1" gutterBottom align="center">
-        Demo Page
-      </Typography>
-
       <DemoForm />
 
       {isLoadingDemos ? (

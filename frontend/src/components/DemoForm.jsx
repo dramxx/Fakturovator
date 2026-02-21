@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { TextField, Button, Box } from '@mui/material';
 import { setContent, clearContent } from '../store/demoSlice';
