@@ -1,7 +1,9 @@
 import SectionTitle from '../components/SectionTitle';
+import { useTranslation } from 'react-i18next';
 
 const ClientsPage = () => {
-  return <SectionTitle>Clients.</SectionTitle>;
+  const { t } = useTranslation();
+  return <SectionTitle>{t('pages.clients.title')}</SectionTitle>;
 };
 
 export default ClientsPage;

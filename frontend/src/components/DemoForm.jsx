@@ -3,18 +3,18 @@ import { TextField, Box } from '@mui/material';
 import { setContent, clearContent } from '../store/demoSlice';
 import { useCreateDemo } from '../api/demoApi';
 import GeneralButton from './GeneralButton';
+import { useTranslation } from 'react-i18next';
 
-function DemoForm() {
+const DemoForm = () => {
+  const { t } = useTranslation();
   const content = useSelector(state => state.demo.content);
   const dispatch = useDispatch();
-  const createDemoMutation = useCreateDemo();
-
-  const isSubmitting = createDemoMutation.isPending;
+  const { mutate: createDemo, isPending: isSubmitting } = useCreateDemo();
 
   const handleSubmit = async () => {
     if (!content.trim()) return;
 
-    createDemoMutation.mutate(content, {
+    createDemo(content, {
       onSuccess: () => {
         dispatch(clearContent());
       },
@@ -29,12 +29,13 @@ function DemoForm() {
     <Box sx={{ mb: 4 }}>
       <TextField
         fullWidth
-        label="Enter your content"
+        multiline
+        rows={4}
+        label={t('pages.demo.form.label')}
+        placeholder={t('pages.demo.form.placeholder')}
         value={content}
         onChange={handleContentChange}
         margin="normal"
-        multiline
-        rows={4}
       />
       <GeneralButton
         variant="outlined"
@@ -42,10 +43,12 @@ function DemoForm() {
         disabled={!content.trim() || isSubmitting}
         sx={{ mt: 2 }}
       >
-        {isSubmitting ? 'Saving...' : 'Save to Database'}
+        {isSubmitting
+          ? t('pages.demo.form.saving')
+          : t('pages.demo.form.saveButton')}
       </GeneralButton>
     </Box>
   );
-}
+};
 
 export default DemoForm;

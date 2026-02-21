@@ -40,6 +40,7 @@ const Layout = ({ children, shapeOpacity = 0.3 }) => {
             display: 'flex',
             flexDirection: 'column',
             position: 'relative',
+            // Grid effect
             '&::before': {
               content: '""',
               position: 'absolute',

@@ -1,10 +1,12 @@
-import { Container, Box, CircularProgress } from '@mui/material';
+import { Container, Box, CircularProgress, Typography } from '@mui/material';
 import DemoForm from '../components/DemoForm';
 import DemoTable from '../components/DemoTable';
 import SectionTitle from '../components/SectionTitle';
 import { useDemos } from '../api/demoApi';
+import { useTranslation } from 'react-i18next';
 
-function DemoPage() {
+const DemoPage = () => {
+  const { t } = useTranslation();
   const {
     data: demos,
     isLoading: isLoadingDemos,
@@ -13,25 +15,36 @@ function DemoPage() {
 
   if (demosError) {
     console.error(demosError);
-    return;
+    return (
+      <Container>
+        <Typography color="error">
+          {t('common.error')}: {demosError.message}
+        </Typography>
+      </Container>
+    );
   }
 
   return (
     <>
-      <SectionTitle>Api Test.</SectionTitle>
-      <Container maxWidth="md" sx={{ mt: 4 }}>
-        <DemoForm />
+      <SectionTitle>{t('pages.demo.title')}</SectionTitle>
 
-        {isLoadingDemos ? (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <DemoTable demos={demos || []} />
-        )}
+      <Container>
+        <Box sx={{ mb: 4 }}>
+          <DemoForm />
+        </Box>
+
+        <Box>
+          {isLoadingDemos ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
+              <CircularProgress />
+            </Box>
+          ) : (
+            <DemoTable demos={demos || []} />
+          )}
+        </Box>
       </Container>
     </>
   );
-}
+};
 
 export default DemoPage;

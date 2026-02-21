@@ -7,16 +7,18 @@ import {
   IconButton,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { getColor } from '../theme/colors';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const menuItems = [
-    { name: 'My Invoices', route: '/invoices' },
-    { name: 'My Companies', route: '/companies' },
-    { name: 'My Clients', route: '/clients' },
+    { name: t('navigation.invoices'), route: '/invoices' },
+    { name: t('navigation.companies'), route: '/companies' },
+    { name: t('navigation.clients'), route: '/clients' },
   ];
 
   return (
@@ -45,7 +47,7 @@ const Header = () => {
             },
           }}
         >
-          FAKTUROVATOR
+          {t('app.name')}
         </Typography>
 
         {/* Menu items on the right */}

@@ -1,0 +1,77 @@
+{
+  "app": {
+    "name": "FAKTUROVATOR"
+  },
+  "navigation": {
+    "invoices": "Moje Faktúry",
+    "companies": "Moje Firmy",
+    "clients": "Moji Klienti",
+    "settings": "Nastavenia",
+    "apiTest": "API test"
+  },
+  "settings": {
+    "language": "Jazyk"
+  },
+  "pages": {
+    "landing": {
+      "title": "Fakturovator."
+    },
+    "invoices": {
+      "title": "Faktúry :",
+      "tableHeaders": {
+        "id": "ID Faktúry",
+        "client": "Klient",
+        "amount": "Suma",
+        "date": "Dátum",
+        "status": "Stav"
+      },
+      "status": {
+        "paid": "Uhradené",
+        "pending": "Čakajúce",
+        "overdue": "Po splatnosti"
+      }
+    },
+    "companies": {
+      "title": "Firmy :"
+    },
+    "clients": {
+      "title": "Klienti :"
+    },
+    "settings": {
+      "title": "Nastavenia :"
+    },
+    "demo": {
+      "title": "API Demo :",
+      "form": {
+        "label": "Zadajte demo obsah:",
+        "placeholder": "Napíšte niečo sem...",
+        "saveButton": "Uložiť do Databázy",
+        "saving": "Ukladám...",
+        "clearButton": "Vymazať"
+      },
+      "table": {
+        "title": "Uložené Demá",
+        "headers": {
+          "content": "Obsah",
+          "date": "Dátum",
+          "actions": "Akcie"
+        },
+        "empty": "Zatiaľ žiadne demá. Vytvorte jedno vyššie!",
+        "delete": "Vymazať"
+      }
+    }
+  },
+  "common": {
+    "loading": "Načítavam...",
+    "error": "Chyba",
+    "retry": "Skúsiť znova",
+    "cancel": "Zrušiť",
+    "save": "Uložiť",
+    "delete": "Vymazať",
+    "edit": "Upraviť",
+    "add": "Pridať",
+    "search": "Hľadať",
+    "filter": "Filtrovať",
+    "sort": "Zoradiť"
+  }
+}

@@ -13,19 +13,21 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import PropTypes from 'prop-types';
 import { useDeleteDemo } from '../api/demoApi';
+import { useTranslation } from 'react-i18next';
 
-function DemoTable({ demos }) {
-  const deleteDemoMutation = useDeleteDemo();
+const DemoTable = ({ demos }) => {
+  const { t } = useTranslation();
+  const { mutate: deleteDemo } = useDeleteDemo();
 
   const handleDelete = async id => {
-    deleteDemoMutation.mutate(id);
+    deleteDemo(id);
   };
 
   if (!demos || demos.length === 0) {
     return (
       <Box sx={{ mt: 4 }}>
         <Typography variant="body1" color="text.secondary" align="center">
-          No content saved yet. Enter something above to get started!
+          {t('pages.demo.table.empty')}
         </Typography>
       </Box>
     );
@@ -34,15 +36,17 @@ function DemoTable({ demos }) {
   return (
     <Box sx={{ mt: 4 }}>
       <Typography variant="h5" component="h2" gutterBottom>
-        Saved Content:
+        {t('pages.demo.table.title')}
       </Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Content</TableCell>
-              <TableCell>Created</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              <TableCell>{t('pages.demo.table.headers.content')}</TableCell>
+              <TableCell>{t('pages.demo.table.headers.date')}</TableCell>
+              <TableCell align="center">
+                {t('pages.demo.table.headers.actions')}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,8 +60,8 @@ function DemoTable({ demos }) {
                   <IconButton
                     color="error"
                     onClick={() => handleDelete(demo.id)}
-                    aria-label="delete"
-                    disabled={deleteDemoMutation.isPending}
+                    aria-label={t('pages.demo.table.delete')}
+                    disabled={false}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -69,7 +73,7 @@ function DemoTable({ demos }) {
       </TableContainer>
     </Box>
   );
-}
+};
 
 DemoTable.propTypes = {
   demos: PropTypes.arrayOf(

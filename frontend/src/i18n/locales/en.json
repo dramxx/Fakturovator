@@ -1,0 +1,77 @@
+{
+  "app": {
+    "name": "FAKTUROVATOR"
+  },
+  "navigation": {
+    "invoices": "My Invoices",
+    "companies": "My Companies",
+    "clients": "My Clients",
+    "settings": "Settings",
+    "apiTest": "API test"
+  },
+  "settings": {
+    "language": "Language"
+  },
+  "pages": {
+    "landing": {
+      "title": "Fakturovator."
+    },
+    "invoices": {
+      "title": "Invoices :",
+      "tableHeaders": {
+        "id": "Invoice ID",
+        "client": "Client",
+        "amount": "Amount",
+        "date": "Date",
+        "status": "Status"
+      },
+      "status": {
+        "paid": "Paid",
+        "pending": "Pending",
+        "overdue": "Overdue"
+      }
+    },
+    "companies": {
+      "title": "Companies :"
+    },
+    "clients": {
+      "title": "Clients :"
+    },
+    "settings": {
+      "title": "Settings :"
+    },
+    "demo": {
+      "title": "API Demo :",
+      "form": {
+        "label": "Enter demo content:",
+        "placeholder": "Type something here...",
+        "saveButton": "Save to Database",
+        "saving": "Saving...",
+        "clearButton": "Clear"
+      },
+      "table": {
+        "title": "Saved Demos",
+        "headers": {
+          "content": "Content",
+          "date": "Date",
+          "actions": "Actions"
+        },
+        "empty": "No demos yet. Create one above!",
+        "delete": "Delete"
+      }
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort"
+  }
+}

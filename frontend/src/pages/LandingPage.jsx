@@ -3,8 +3,10 @@ import SectionTitle from '../components/SectionTitle';
 import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import { getColor } from '../theme/colors';
+import { useTranslation } from 'react-i18next';
 
 function LandingPage() {
+  const { t } = useTranslation();
   return (
     <Box
       sx={{
@@ -117,13 +119,15 @@ function LandingPage() {
                 zIndex: 4,
               }}
             >
-              <SectionTitle
-                fontSize="8rem"
-                underlineWidth="70%"
-                underlineHeight="30px"
-              >
-                Fakturovator.
-              </SectionTitle>
+              <Box sx={{ flex: 1, position: 'relative', zIndex: 2 }}>
+                <SectionTitle
+                  fontSize="8rem"
+                  underlineWidth="70%"
+                  underlineHeight="30px"
+                >
+                  {t('pages.landing.title')}
+                </SectionTitle>
+              </Box>
             </Box>
           </Box>
         </Paper>

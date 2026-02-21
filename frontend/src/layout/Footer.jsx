@@ -1,8 +1,10 @@
 import { Box, Typography, useTheme } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -23,7 +25,7 @@ const Footer = () => {
             color: 'inherit',
           }}
         >
-          API test
+          {t('navigation.apiTest')}
         </Link>
       </Typography>
     </Box>
