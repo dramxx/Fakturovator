@@ -10,7 +10,7 @@ function LandingPage() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: '98vh',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: getColor('background.white'),
@@ -120,11 +120,7 @@ function LandingPage() {
               }}
             >
               <Box sx={{ flex: 1, position: 'relative', zIndex: 2 }}>
-                <SectionTitle
-                  fontSize="8rem"
-                  underlineWidth="70%"
-                  underlineHeight="30px"
-                >
+                <SectionTitle fontSize="8rem" underlineHeight="30px">
                   {t('pages.landing.title')}
                 </SectionTitle>
               </Box>

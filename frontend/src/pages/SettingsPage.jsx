@@ -11,7 +11,12 @@ const SettingsPage = () => {
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <SectionTitle>{t('pages.settings.title')}</SectionTitle>
 
       <Box sx={{ mt: 4, maxWidth: 300 }}>

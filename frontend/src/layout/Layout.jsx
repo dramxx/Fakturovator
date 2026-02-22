@@ -8,7 +8,7 @@ const Layout = ({ children, shapeOpacity = 0.3 }) => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        minHeight: '98vh',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: getColor('background.white'),

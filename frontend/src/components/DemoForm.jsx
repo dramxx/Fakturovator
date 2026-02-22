@@ -38,6 +38,8 @@ const DemoForm = () => {
         margin="normal"
       />
       <GeneralButton
+        underlineWidth="10%"
+        underlineMarginTop="0.2em"
         variant="outlined"
         onClick={handleSubmit}
         disabled={!content.trim() || isSubmitting}

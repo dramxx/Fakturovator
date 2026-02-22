@@ -25,7 +25,12 @@ const DemoPage = () => {
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        display: 'flex',
+        mb: 4,
+      }}
+    >
       <SectionTitle>{t('pages.demo.title')}</SectionTitle>
 
       <Container>
@@ -43,7 +48,7 @@ const DemoPage = () => {
           )}
         </Box>
       </Container>
-    </>
+    </Box>
   );
 };
 

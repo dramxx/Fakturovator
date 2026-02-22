@@ -32,16 +32,16 @@
       }
     },
     "companies": {
-      "title": "Companies :"
+      "title": "Companies."
     },
     "clients": {
-      "title": "Clients :"
+      "title": "Clients."
     },
     "settings": {
-      "title": "Settings :"
+      "title": "Settings."
     },
     "demo": {
-      "title": "API Demo :",
+      "title": "API Demo.",
       "form": {
         "label": "Enter demo content:",
         "placeholder": "Type something here...",

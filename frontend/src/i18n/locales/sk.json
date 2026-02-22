@@ -17,7 +17,7 @@
       "title": "Fakturovator."
     },
     "invoices": {
-      "title": "Faktúry :",
+      "title": "Faktúry.",
       "tableHeaders": {
         "id": "ID Faktúry",
         "client": "Klient",
@@ -32,16 +32,16 @@
       }
     },
     "companies": {
-      "title": "Firmy :"
+      "title": "Firmy."
     },
     "clients": {
-      "title": "Klienti :"
+      "title": "Klienti."
     },
     "settings": {
-      "title": "Nastavenia :"
+      "title": "Nastavenia."
     },
     "demo": {
-      "title": "API Demo :",
+      "title": "API Demo.",
       "form": {
         "label": "Zadajte demo obsah:",
         "placeholder": "Napíšte niečo sem...",

@@ -10,10 +10,18 @@ const SectionTitle = ({
   color = getColor('text.primary'),
   underlineColor = getColor('primary.red'),
   fontSize = '3rem',
-  underlineWidth = '9%',
-  underlineHeight = '14px',
+  underlineWidth = '70%',
+  underlineHeight = '10px',
   ...typographyProps
 }) => {
+  // Calculate text length and make underline proportional to font size
+  const textLength = children?.toString().length || 10;
+  const fontSizeMultiplier = parseFloat(fontSize) || 3; // Default 3rem
+  const calculatedWidth = Math.min(
+    Math.max(textLength * fontSizeMultiplier * 4, 80),
+    400
+  );
+
   return (
     <Box sx={{ mb: 4 }}>
       <Typography
@@ -34,7 +42,10 @@ const SectionTitle = ({
       </Typography>
       <Box
         sx={{
-          width: underlineWidth,
+          width:
+            typeof underlineWidth === 'string' && underlineWidth.includes('%')
+              ? calculatedWidth
+              : underlineWidth,
           height: underlineHeight,
           backgroundColor: underlineColor,
           mt: '-2px',

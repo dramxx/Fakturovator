@@ -5,12 +5,21 @@ import { getColor } from '../theme/colors';
 const GeneralButton = ({
   children,
   underlineColor = getColor('primary.red'),
-  underlineWidth = '8%',
-  underlineHeight = '5px',
+  underlineWidth = '70%',
+  underlineHeight = '8px',
   underlineSpacing = 2,
+  underlineMarginTop = '-10px',
   fontSize = '1em',
   ...buttonProps
 }) => {
+  // Calculate text length and make underline proportional to font size
+  const textLength = children?.toString().length || 10;
+  const fontSizeMultiplier = parseFloat(fontSize) || 1; // Default 1em
+  const calculatedWidth = Math.min(
+    Math.max(textLength * fontSizeMultiplier * 6, 40),
+    200
+  );
+
   return (
     <Box sx={{ display: 'block' }}>
       <Button
@@ -29,9 +38,13 @@ const GeneralButton = ({
       </Button>
       <Box
         sx={{
-          width: underlineWidth,
+          width:
+            typeof underlineWidth === 'string' && underlineWidth.includes('%')
+              ? calculatedWidth
+              : underlineWidth,
           height: underlineHeight,
           backgroundColor: underlineColor,
+          marginTop: underlineMarginTop,
         }}
       />
     </Box>
